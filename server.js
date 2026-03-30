@@ -111,7 +111,7 @@ const {
 
     await transporter.sendMail({
       from: process.env.MAIL_EMAIL,
-      to: "reviewexpress443@gmail.com",
+      to: "sikandersunny2017@gmail.com",
       subject: "New Moving Quote Request",
       html,
       replyTo: email || undefined,
