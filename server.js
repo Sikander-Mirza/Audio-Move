@@ -13,7 +13,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:8080",
-      "https://your-frontend-domain.com"
+      "https://your-frontend-domain.com",
+      "https://ihatemoving.co.uk"
     ],
     methods: ["POST", "OPTIONS"],
   })
