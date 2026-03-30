@@ -110,7 +110,7 @@ const {
     `;
 
     await transporter.sendMail({
-      from: process.env.MAIL_EMAIL,
+      from: "contact@ihatemoving.co.uk",
       to: "sikandersunny2017@gmail.com",
       subject: "New Moving Quote Request",
       html,
