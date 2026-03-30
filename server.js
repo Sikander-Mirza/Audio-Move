@@ -14,7 +14,7 @@ app.use(
     origin: [
       "http://localhost:8080",
       "https://your-frontend-domain.com",
-      "https://ihatemoving.co.uk"
+      "https://www.ihatemoving.co.uk"
     ],
     methods: ["POST", "OPTIONS"],
   })
