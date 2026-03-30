@@ -109,13 +109,13 @@ const {
       }
     `;
 
-    await transporter.sendMail({
-      from: "contact@ihatemoving.co.uk",
-      to: "sikandersunny2017@gmail.com",
-      subject: "New Moving Quote Request",
-      html,
-      replyTo: email || undefined,
-    });
+await transporter.sendMail({
+  from: `"${fullName || "Website Lead"} via I Hate Moving" <${process.env.MAIL_EMAIL}>`,
+  to: "sikandersunny2017@gmail.com",
+  subject: `New Quote Request - ${fullName || "User"} (${email || "No Email"})`,
+  html,
+  replyTo: email || undefined,
+});
 
     res.status(200).json({ success: true, audioUrl });
   } catch (error) {
