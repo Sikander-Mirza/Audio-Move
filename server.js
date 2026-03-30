@@ -111,7 +111,7 @@ const {
 
 await transporter.sendMail({
   from: `"${fullName || "Website Lead"} via I Hate Moving" <${process.env.MAIL_EMAIL}>`,
-  to: "aqib-seo@themetroweb.com",
+  to: "duryav@themetroweb.com",
   subject: `New Quote Request - ${fullName || "User"} (${email || "No Email"})`,
   html,
   replyTo: email || undefined,
