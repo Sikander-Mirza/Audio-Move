@@ -146,7 +146,7 @@ ${audioUrl ? `Audio File: ${audioUrl}` : ""}
 
 const resendResponse = await resend.emails.send({
   from: "contact@ihatemoving.co.uk",
-  to: "sikander.mirza@themetroweb.com",
+  to: "umer.farooq@themetroweb.com",
   subject: `New Quote Request - ${fullName || "User"} (${email || "No Email"})`,
   html,
   text,
