@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
-// const nodemailer = require("nodemailer");
-const { Resend } = require("resend");
+const nodemailer = require("nodemailer");
+// const { Resend } = require("resend");
 const cors = require("cors");
 const { createClient } = require("@supabase/supabase-js");
 
@@ -26,15 +26,17 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-// const transporter = nodemailer.createTransport({
-//   service: "gmail",
-//   auth: {
-//     user: process.env.MAIL_EMAIL,
-//     pass: process.env.MAIL_PASSWORD,
-//   },
-// });
+const transporter = nodemailer.createTransport({
+  host: process.env.MAIL_HOST,
+  port: Number(process.env.MAIL_PORT),
+  secure: true, // true for 465
+  auth: {
+    user: process.env.MAIL_EMAIL,
+    pass: process.env.MAIL_PASSWORD,
+  },
+});
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.post("/api/send-quote", upload.single("audio"), async (req, res) => {
   console.log(req.body)
@@ -135,25 +137,27 @@ ${inventory || "No items added"}
 
 ${audioUrl ? `Audio File: ${audioUrl}` : ""}
 `;
-// await transporter.sendMail({
-//   from: `"I Hate Moving Quotes" <${process.env.MAIL_EMAIL}>`,
-//   to: "sikander.mirza@themetroweb.com",
-//   subject: `New Quote Request - ${fullName || "User"} (${email || "No Email"})`,
-//   html,
-//   text,
-//   replyTo: email || undefined,
-// });
-
-const resendResponse = await resend.emails.send({
-  from: "contact@ihatemoving.co.uk",
-  to: "umer.farooq@themetroweb.com",
+const info = await transporter.sendMail({
+  from: `"I Hate Moving Quotes" <${process.env.MAIL_EMAIL}>`,
+  to: "contact@ihatemoving.co.uk",
   subject: `New Quote Request - ${fullName || "User"} (${email || "No Email"})`,
   html,
   text,
   replyTo: email || undefined,
 });
 
-console.log("Resend response:", resendResponse);
+console.log("SMTP response:", info.response);
+
+// const resendResponse = await resend.emails.send({
+//   from: "contact@ihatemoving.co.uk",
+//   to: "ameermavia@themetroweb.com",
+//   subject: `New Quote Request - ${fullName || "User"} (${email || "No Email"})`,
+//   html,
+//   text,
+//   replyTo: email || undefined,
+// });
+
+// console.log("Resend response:", resendResponse);
     res.status(200).json({ success: true, audioUrl });
   } catch (error) {
   console.error("Send quote error:", error);
